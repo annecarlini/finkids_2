@@ -2,15 +2,15 @@
 
 import * as React from "react"
 import {
-  BookOpen,
-  Bot,
+  // BookOpen,
+  // Bot,
   Command,
-  Frame,
+  // Frame,
   LifeBuoy,
-  Map,
-  PieChart,
+  // Map,
+  // PieChart,
   Send,
-  Settings2,
+  // Settings2,
   SquareTerminal,
 } from "lucide-react"
 
@@ -30,92 +30,55 @@ import {
 
 const data = {
   user: {
-    name: "shadcn",
+    name: "Nome do Usuário",
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
     {
-      title: "Playground",
+      title: "Conceitos de aprendizagem",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Fase 1",
           url: "#",
         },
         {
-          title: "Starred",
+          title: "Fase 2",
           url: "#",
         },
         {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
+          title: "Fase 3",
           url: "#",
         },
         {
-          title: "Explorer",
+          title: "Fase 4",
           url: "#",
         },
         {
-          title: "Quantum",
+          title: "Fase 5",
           url: "#",
         },
       ],
     },
     {
-      title: "Documentation",
+      title: "Jogos de aprendizagem",
       url: "#",
-      icon: BookOpen,
+      icon: SquareTerminal,
+      isActive: true,
       items: [
         {
-          title: "Introduction",
+          title: "Mercado inteligente",
           url: "#",
         },
         {
-          title: "Get Started",
+          title: "Troco Rápido",
           url: "#",
         },
         {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
+          title: "Cofrinho dos Sonhos",
           url: "#",
         },
       ],
@@ -134,21 +97,7 @@ const data = {
     },
   ],
   projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
+    
   ],
 }
 

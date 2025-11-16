@@ -1,103 +1,181 @@
-/* Importando font pelo google fonts */
-@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Yusei+Magic&display=swap');
+/* Importando Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Yusei+Magic&display=swap');
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .init-page {
-  background-color: #F4E0C9;
+  background-color: #f6e9da;
   display: flex;
   height: 100vh;
-  overflow: hidden; /* evita scroll indesejado */
-}
-
-.main-introduction {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.main-introduction h1{
-    font-family: "Yusei Magic", sans-serif;
-    font-size: 2rem;
-    color: #E97E34;
-}
-
-.main-introduction h2 {
-    font-family: "Yusei Magic", sans-serif;
-    font-size: 1.5rem;
-    color: #E97E34;
-}
-.card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    padding-top: 2rem;
-}
-
-.content-card {
-    position: relative; /* necessário para posicionar filhos absolutos */
-    width: 64rem;
-    height: 20rem;
-    border-radius: 2rem;
-    background-color: #187E9B;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* texto no topo */
-    align-items: center;
-    overflow: hidden;
-
-}
-
-.content-card h3 {
-    font-family: "Yusei Magic", sans-serif;
-    font-size: 1.5rem;
-    color: #F4E0C9;
-    text-align: center;
-    margin: 0;
-
-}
-
-.content-card .images {
-    position: absolute; /* fixa na base */
-    bottom: 0; /* 👈 cola na base do retângulo */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 3rem; /* espaço entre bonecos */
-    width: 100%;
-    padding-bottom: 0rem; /* pequeno respiro da borda */
-}
-
-.content-card .images img {
-    height: 12rem;
-    object-fit: contain;
-}
-
-.content-card .images img:hover {
-    transform: scale(1.02);
-    cursor: pointer;
-
+  overflow: hidden;
 }
 
 .first {
-    display: flex;
-    flex-direction: column;
-    padding-top: 2rem;
-    margin-left: 11rem;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+  margin-left: 11rem;
 }
 
-.presentation-nina, .presentation-leo, .presentation-duda {
-    width: 64rem;
-    height: 12rem;
-    background-color: #E97E34;
-    margin-top: 1rem;
-    padding: 2rem;
-    border-radius: 2rem;
+.main-introduction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
+.main-introduction h1 {
+  font-family: "Yusei Magic", sans-serif;
+  font-size: 30px;
+  padding-top: 25px;
+  color: #3c3c3c;
+}
+
+.choose-avatar h2 {
+  font-family: "Yusei Magic", sans-serif;
+  font-size: 20px;
+  padding-top: 25px;
+  color: #3c3c3c;
+}
+
+.choose-avatar p{
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 16px;
+    padding-top: 5px;
+    color: #3c3c3c;
+}
+
+.card {
+  width: 1100px;
+  height: 450px;
+  background-color: #dcb9a0;
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+  margin-top: 30px;
+
+  display: flex;
+  gap: 20px;
+}
+
+/* CARD INDIVIDUAL */
+.content-card {
+  position: relative;
+  width: 250px;
+  height: 400px;
+  border-radius: 25px;
+  background-color: #187f9b97;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.content-card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* EFEITO HOLOGRÁFICO */
+.content-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 255, 0.4),
+    rgba(0, 255, 255, 0.4),
+    rgba(255, 255, 0, 0.4),
+    rgba(0, 255, 0, 0.4)
+  );
+  background-size: 400% 400%;
+
+  opacity: 0;
+  transition: 0.4s ease;
+  border-radius: 25px;
+  z-index: 0;
+
+  animation: moveGradient 6s linear infinite;
+}
+
+@keyframes moveGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.content-card:hover::before {
+  opacity: 1;
+}
+
+/* ELEMENTOS INTERNOS */
+.content-card h3,
+.content-card .images {
+  position: relative;
+  z-index: 1;
+}
+
+.content-card h3 {
+  font-family: "Yusei Magic", sans-serif;
+  font-size: 1.5rem;
+  color: #F4E0C9;
+  text-align: center;
+  margin-top: auto;
+}
+
+.content-card .images {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.content-card .images img {
+  max-height: 230px;
+  object-fit: contain;
+  transition: 0.2s ease;
+}
+
+.content-card .images img:hover {
+  transform: scale(1.05);
+}
+
+/* CARD SELECIONADO */
+.content-card.selected {
+  transform: scale(1.1);
+  border: 3px solid white;
+  box-shadow: 0 0 25px white, 0 0 40px #00ffffa1;
+}
+
+/* BOTÃO CONTINUAR */
+.continue-btn {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background-color: #E97E34;
+  color: white;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-family: "Yusei Magic", sans-serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  transition: 0.3s ease;
+}
+
+.continue-btn:hover {
+  transform: scale(1.01);
+  background-color: #cf6c2a;
+}
