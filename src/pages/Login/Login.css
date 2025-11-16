@@ -6,76 +6,54 @@ body {
 }
 
 .login-page {
-  background-color: #e97e34;
+  background-image: url(../../assets/background-4.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
   display: flex;
-  position: relative; /* container de referência */
+  justify-content: flex-end;
+  align-items: center;
+
   height: 100vh;
-  overflow: hidden; /* evita scroll indesejado */
+  position: relative;
+  overflow: hidden;
 }
 
 /* 🔹 Card fixo à esquerda */
 .back-card {
   height: 100vh;
-  width: 900px;
-  background-color: #F4E0C9;
-  border-bottom-right-radius: 5rem;
-  border-top-right-radius: 5rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 50vw;
+  background-color: rgba(246, 233, 233, 0.7); /* transparência só do fundo */
+  border-top-left-radius: 4rem;
+  border-bottom-left-radius: 4rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.9);
+  padding: 4rem;
+  z-index: 10; /* deixa o card e os elementos acima do fundo */
+  position: relative; /* necessário para que o z-index funcione */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
   text-align: center;
-  padding: 8rem;
-  position: fixed; /* ✅ fixa o card */
-  left: 0;
-  top: 0;
-  z-index: 1;
 }
 
 .back-card h1 {
-  font-size: 3rem;
-  font-family: "Yusei Magic", sans-serif;
+
+  font-size: 36px;
+  font-family: "Poppins", sans-serif;
+  color: #187f9bb6;
+  padding-bottom: 2rem;
 }
 
 .back-card p {
-  font-size: 1.5rem;
-  font-family: "Yusei Magic", sans-serif;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  max-width: 400px;
+  padding-bottom: none;
 }
 
-.card-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* 🔹 Imagem sobreposta */
-.img_loginpage {
-    position: fixed; /* fixa em relação à tela */
-    bottom: 0;       /* alinha na parte inferior */
-    left: 700px;     /* ajusta horizontalmente */
-    z-index: 2;      /* garante que fique acima do back-card */
-    transform: translateY(0); /* remove o deslocamento vertical */
-}
-
-.img_loginpage img {
-    height: 500px;
-    width: auto;
-    pointer-events: none; /* evita que a imagem bloqueie cliques no formulário */
-}
-
-.second-text {
-    position: absolute; /* ou fixed se quiser que acompanhe a tela */
-    top: 10%;           /* posiciona verticalmente */
-    right: 150px;        /* distância da borda direita */
-    z-index: 3;         /* acima do back-card e da imagem */
-}
-
-.second-text h2 {
-    font-family: "Yusei Magic", sans-serif;
-    font-size: 50px;
-    text-align: center;
-    color: #ffffff;
-}
-
-.second-text p {
-    font-family: "Yusei Magic", sans-serif;
-    font-size: 20px; 
-    text-align: center;
+.login-card-custom {
+  margin-top: 80px;
 }

@@ -10,9 +10,10 @@ function Navbar() {
     </div>
 
     <div className="titles">
-        <Link to="/">Home</Link>
-        <p>Sobre o projeto</p>
-        <Link to="Login">Login</Link>
+        
+        <Link to="about" className='subtitle'>Sobre o projeto</Link>
+        <Link to="Login" className='subtitle'>Login</Link>
+        
     </div>
 </div>
 

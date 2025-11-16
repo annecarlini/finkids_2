@@ -1,61 +1,116 @@
 /* rfce cria o componete react funcional ---- ES7 */
-import AvatarFrontpage from '../../assets/Avatar-frontpage.png';
+import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom';
+import AvatarFrontpage from '../../assets/squad1.png';
 import './Homepage.css' /* Importando CSS */
-import BtnInit from '@/components/ui/btn1';
 import Navbar from '@/components/custom/Navbar/Navbar';
-
+import Footer from '../Footer/Footer'
+import vilan from '../../assets/pigvilan.png'
+import badge1 from '../../assets/card-1.png'
+import badge2 from '../../assets/card-2.png'
+import badge3 from '../../assets/card-3.png'
+import badge4 from '../../assets/card-4.png'
+import badge5 from '../../assets/card-5.png'
+import badge6 from '../../assets/win-badge-1.png'
+// import bgAudio from '../../audio/backgroud-music.mp3'
 
 
 function Homepage() {
+
+  {/* essa const é pra scrollar a página para onde quero */}
+  const instructionRef = useRef<HTMLDivElement | null>(null);
+  const handleScrollToInstructions = () => {
+    instructionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  {/* Aqui é para clicar no botão e ir para página de login */}
+  const navigate = useNavigate();
+  const goToLogin =() => {
+    navigate('/login');
+  };
+
+
+
   return (
-    <div className="home">
-      <Navbar />
-      <div className="home_description">
-        <h1>
-          A <strong>finkids</strong> é uma plataforma web gamificada criada para ensinar educação financeira de forma simples, interativa e divertida para crianças.
-        </h1>
-      </div>
+    <>
+      {/* <audio autoPlay loop>
+        <source src={bgAudio} type='audio/mpeg'/>
+      </audio>
+     */}
+      <div className="home">
+        <Navbar />
+    
+        <img src={vilan} alt="vilan" className="vilan" />
 
-      {/* Novo container para alinhar texto e imagem lado a lado */}
-      <div className="home_content">
-        <div className="home_subtitle">
-          <h2>
-            Nosso propósito é mostrar, desde cedo, como pode ser fascinante
-            assumir o controle da vida financeira e crescer com essa habilidade.
-          </h2>
-          
+        {/* Container para alinhar texto e imagem lado a lado */}
+        <div className="home_content">
+
+        
+            <div className="home_subtitle">
+              <h1>
+                Aprender sobre dinheiro nunca foi tão épico!
+              </h1>
+              <h2>
+                Aqui na <strong>FinHero!</strong> cada decisão te aproxima de derrotar o vilão das finanças: o Desperdício — aquele que tenta roubar suas moedas, bagunçar seu orçamento e atrasar sua evolução.
+              </h2>
+              <div className="btns">
+                <button className='btn1' onClick={goToLogin}>Começar aventura</button> {/* linkar para login */}
+                <button className='btn2' onClick={handleScrollToInstructions}>Como funciona?</button> {/* scrollar a página */}
+              </div>
+            </div>
+
+          <div className="img_frontpage">
+            <img src={AvatarFrontpage} alt="Avatar Frontpage" />
+          </div>
+
         </div>
 
-        <div className="img_frontpage">
-          <img src={AvatarFrontpage} alt="Avatar Frontpage" />
+        <div className="card-tittle" ref={instructionRef}>
+            <h2>Passo a passo da missão</h2>
         </div>
-      </div>
 
-      <div className="card-tittle">
-          <h2>Como funciona a plataforma?</h2>
+
+
+        <div className="instruction">
+          <div className="card1">
+            <h3>Cadastro simplificado </h3>
+            <img src={badge1} alt="" />
+            <p>Crie sua conta em segundo se prepara-se para o desafio.</p>
+          </div>
+
+          <div className="card2">
+            <h3>Escolha seu Super Herói</h3>
+            <img src={badge2} alt="" />
+            <p>Selecione o avatar que vai te acompanhar ao longo da sua jornada!</p> 
+          </div>
+
+          <div className="card3">
+            <h3>Aprenda conceitos</h3>
+            <img src={badge3} alt="" />
+            <p>Um Quiz em 5 fases que te ensina os conceitos básicos da educação financeira.</p>
+          </div>
+
+          <div className="card4">
+            <h3>Ganhe moedas e evolua</h3>
+            <img src={badge4} alt="" />
+            <p>Acumule moedas durante o aprendizado e acompanhe seu progresso até virar um mestre!</p>
+          </div>
+        
+          <div className="card5">
+            <h3>Aplique seu conhecimento jogando</h3>
+            <img src={badge5} alt="" />
+            <p>Continue seu aprendizado aplicando os conceitos sobre dinheiro em situações similares a realidade. </p>
+          </div>
+
+          <div className="card6">
+            <h3>Ganhe sua badge</h3>
+            <img src={badge6} alt="" />
+            <p>Complete todos os desafios, vença o inimigo e estampe sua badge.</p>
+          </div>        
+        </div> 
+
+        <Footer />
       </div>
-      <div className="instruction">
-        <div className="card1">
-          <h3>1</h3>
-          <p>Antes de sair gastando por aí, você vai entender como o dinheiro funciona. O que é mesada? Como fazer um orçamento? O que significa economizar? Tudo explicado com exemplos do seu dia a dia.</p>
-        </div>
-        <div className="card2">
-          <h3>2</h3>
-          <p>Depois de aprender, é hora de mostrar que entendeu! Você vai responder quizzes rápidos e divertidos que ajudam a fixar o conteúdo. Acerte as perguntas e desbloqueie conquistas!</p> 
-        </div>
-        <div className="card3">
-          <h3>3</h3>
-          <p>Agora é hora do jogo! Você vai ganhar mesada, decidir o que comprar, economizar ou investir. Cada escolha tem consequência, e você vai ver como pensar antes de gastar pode fazer toda a diferença. </p>
-        </div>
-        <div className="card4">
-          <h3>4</h3>
-          <p>Qual o desafio?
-            Mostrar que sabe cuidar do seu dinheiro com inteligência, muita responsabilidade e muita diversão.
-          </p>
-          <BtnInit />
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 

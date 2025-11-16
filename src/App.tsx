@@ -3,7 +3,10 @@ import './App.css'
 import Homepage from './pages/Home/Homepage'
 import Login from './pages/Login/Login'
 import Init from './pages/Chooseavatar/Init'
-import Phase from './pages/Phasespage/Phase';
+import Phase from './pages/Phasespage/Phase'
+import About from './pages/Aboutproject/About'
+import Mercadinho from './pages/Mercadinho/mercadinho'
+
 
 
 
@@ -17,6 +20,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/init" element={<Init />} />
         <Route path="/phase" element={<Phase />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/mercado" element={<Mercadinho />} />
+
       </Routes>
     </Router>
    </div>

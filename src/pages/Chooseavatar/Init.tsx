@@ -1,8 +1,9 @@
 import "./Init.css"
 import Mysidebar from "../../components/custom/Sidebard/Mysidebar"
-import AvatarN from '../../assets/AvatarN.png';
-import AvatarL from '../../assets/AvatarL.png';
-import AvatarD from '../../assets/AvatarD.png';
+import AvatarN from '../../assets/avatar1.png';
+import AvatarL from '../../assets/avatar3.png';
+import AvatarD from '../../assets/avatar2.png';
+import AvatarG from '../../assets/avatar4.png';
 import { useState } from "react"; /* hook do react que cria uma variável reativa, ou seja, quando ela muda, o React renderiza novamente o componente */
 import { ButtonInit } from "../../components/custom/ButtonInit/buttoninit"
 
