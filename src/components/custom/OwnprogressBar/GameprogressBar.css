@@ -1,0 +1,43 @@
+.cpb-root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  margin-top: 18px;
+}
+
+.cpb-track {
+width: 100%;
+max-width: 300px;
+background: rgba(0,0,0,0.06);
+border-radius: 999px;
+overflow: hidden;
+position: relative;
+}
+
+
+.cpb-fill {
+height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #60a5fa 0%, #3b82f6 100%);
+  border-radius: 999px 0 0 999px;
+
+  /* Animação super fluida */
+  transition: width 850ms cubic-bezier(.16,1,.3,1),
+              background 450ms ease-in-out;
+}
+
+
+.cpb-label {
+font-size: 12px;
+color: #111827;
+}
+
+
+/* Accessibility tweak: show a subtle striped pattern for motion-reduced users */
+@media (prefers-reduced-motion: reduce) {
+.cpb-fill { transition: none; }
+}
+
+

@@ -1,0 +1,487 @@
+/* Importando Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Yusei+Magic&display=swap');
+
+body {
+    margin: 0;
+    background-color: #f6e9da;
+}
+
+.main {
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+
+.wrap-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.left-container {
+    display: flex;
+    align-items:  flex-start;
+    width: 500px;
+    height: 80px;
+    background-color: #5796a7b3;
+    border-radius: 25px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    gap: 60px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+
+.left-container h2 {
+    color: black;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Yusei Magic", sans-serif;
+    margin-top: 10px;
+
+
+}
+
+.right-container {
+    display: flex;
+    align-items: center;
+    width: 500px;
+    height: 80px;
+    background-color: #5796a7b3;
+    border-radius: 25px;
+    padding: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.focus-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.orcamento-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.orcamento-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.orcamento-text .h2-1 {
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 18px;
+    text-align: center;
+    color: black;
+    margin-right: 100px;
+}
+
+.orcamento-text p {
+    font-size: 14px;
+    font-family: "Yusei Magic", sans-serif;
+    font-weight: 100;
+}
+
+
+.focus-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.focus-text .h2-2 {
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 18px;
+    text-align: center;
+    color: black;
+    margin-right: 100px;
+}
+
+.focus-container p {
+    font-size: 14px;
+    font-family: "Yusei Magic", sans-serif;
+    font-weight: 100;
+
+}
+
+.right-container img {
+    margin-right: 8px;
+    height: 70px;
+}
+
+.right-container .img-focus {
+    margin-right: 8px;
+    height: 50px;
+}
+
+/* CSS do bloco de direcionamento das escolhas */
+
+
+
+
+.choice {
+    position: relative;
+    width: 1020px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #5796a736;
+    margin-top: 20px;
+    border-radius: 25px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    overflow: hidden; /* importante pro efeito */
+}
+
+/* Borda animada */
+.choice::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px; /* espessura da borda */
+    border-radius: 25px;
+    background: linear-gradient(120deg,
+        #5796a7,
+        #7fc4d6,
+        #ffffff,
+        #7fc4d6,
+        #5796a7
+    );
+    background-size: 300% 300%;
+    animation: borderFlow 4s ease infinite;
+    z-index: -1;
+    mask: 
+        linear-gradient(#000 0 0) content-box, 
+        linear-gradient(#000 0 0);
+    mask-composite: exclude; /* recorta o centro, deixando só a borda */
+}
+
+/* Animação da borda */
+/* @keyframes borderFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+} */
+
+.choice h2 {
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 18px;
+    text-align: center;
+    color: black;
+}
+
+.choice p {
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 14px;
+    color: #555555;
+}
+
+
+/* os cards de escolha */
+
+.bundle-choices {
+    display: flex;
+    gap: 21px;
+    max-width: 1020px;
+}
+
+.choice-1 {
+    width: 326px;
+    height: 350px;
+    background-color: #ece1d4;
+    margin-top: 20px;
+    border-radius: 25px;
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.choice-2 {
+    width: 326px;
+    height: 350px;
+    background-color: #ece1d4;
+    margin-top: 20px;
+    border-radius: 25px;
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.choice-3 {
+    width: 326px;
+    height: 350px;
+    background-color: #ece1d4;
+    margin-top: 20px;
+    border-radius: 25px;
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+
+/* estilo dos textos dos cards de choise */
+
+.choice-1 h2, .choice-2 h2, .choice-3 h2{
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 24px;
+    color: #e97e34;
+}
+
+.choice-1 p, .choice-3 p {
+    font-size: 18px;
+    text-align: justify;
+    margin-top: 30px;
+}
+
+.choice-2 p {
+    font-size: 18px;
+    text-align: justify;
+    margin-top: 70px;
+}
+
+.choice-2 .p-2 {
+    font-size: 14px;
+    text-align: justify;
+    margin-top: 0px;
+    color: #e97e34;
+    text-align: center;
+    font-weight: 700;
+    text-transform:uppercase;
+}
+
+.total {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.total img {
+    height: 70px;
+    margin-top: 20px;
+}
+
+.total h3 {
+    font-family: "Poppins", sans-serif;
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.choice-3 .p-2 {
+    font-size: 14px;
+    text-align: justify;
+    margin-top: 0px;
+    color: #e97e34;
+    text-align: center;
+    font-weight: 700;
+    text-transform:uppercase;
+}
+ 
+
+
+/* precisa criar um pseudo-elemetno pra poder ter a borda animada*/
+
+.choice-1,
+.choice-2,
+.choice-3 {
+    position: relative;
+    overflow: hidden;
+}
+
+.choice-1::before,
+.choice-2::before,
+.choice-3::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px; /* espessura da borda */
+    border-radius: 25px;
+    background: linear-gradient(120deg,
+        #5796a7,
+        #7fc4d6,
+        #ffffff,
+        #7fc4d6,
+        #5796a7
+    );
+    background-size: 300% 300%;
+    animation: borderFlow 4s ease infinite;
+    opacity: 0; /* começa invisível */
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask-composite: exclude;
+}
+
+/* ativa a borda no hover */
+.choice-1:hover::before,
+.choice-2:hover::before,
+.choice-3:hover::before {
+    opacity: 1;
+}
+
+
+
+
+
+
+
+.tips {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 1020px;
+    background-color: #e97f346c;
+    margin-top: 20px;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    position: relative;
+    overflow: visible;
+}
+
+.tips::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px; /* espessura da borda */
+    border-radius: 25px;
+    background: linear-gradient(120deg,
+        #ff7a00,
+        #ffa63b,
+        #ffd28f,
+        #ff9a27,
+        #ff6b00
+    );
+    background-size: 300% 300%;
+    animation: borderFlow 4s ease infinite;
+    opacity: 0; /* começa invisível */
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask-composite: exclude;
+}
+
+.tips:hover::before {
+    opacity: 1;
+}
+
+.tips .tip-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.tips img {
+   width: 80px;
+   height: auto;
+   margin-left: 20px;
+   position: relative;
+   z-index: 2;
+}
+
+.tips h2 {
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 20px;
+    color: #333;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 15px;
+    text-align: start;
+    
+}
+
+.tips p {
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 15px;
+    color: #555;
+    position: relative;
+    z-index: 2;
+    text-align: start;
+}
+
+/* estilizando as tags*/
+.tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    width: fit-content;
+    margin: 0 auto 10px auto; /* centraliza */
+
+    padding: 2px 16px;
+    border-radius: 20px;
+
+    background-color: #d8f5d0; 
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.tag img {
+  width: 16px;
+  height: 16px;
+}
+
+/* Bom negócio */
+.tag-custo {
+  background-color: hsla(110, 13%, 91%, 0.213);
+  border-color: #2b7a0b;
+  color: #1d5e07;
+}
+
+/* configurações do container principal */
+.content-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: center;
+    text-align: center;
+    max-width: 1020px;
+    margin-bottom: 50px;
+
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.text h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.text h2 {
+    font-size: 20px;
+}

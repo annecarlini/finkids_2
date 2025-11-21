@@ -53,14 +53,6 @@ const data = {
           title: "Fase 3",
           url: "#",
         },
-        {
-          title: "Fase 4",
-          url: "#",
-        },
-        {
-          title: "Fase 5",
-          url: "#",
-        },
       ],
     },
     {
@@ -70,15 +62,11 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "Mercado inteligente",
+          title: "Labirinto",
           url: "#",
         },
         {
-          title: "Troco Rápido",
-          url: "#",
-        },
-        {
-          title: "Cofrinho dos Sonhos",
+          title: "Carrinho",
           url: "#",
         },
       ],
@@ -98,7 +86,9 @@ const data = {
   ],
   projects: [
     
+    
   ],
+
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
