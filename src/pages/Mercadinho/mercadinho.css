@@ -338,8 +338,16 @@ body {
     opacity: 1;
 }
 
-
-
+.total .divider {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 8px;
+  background: #ffe3e3;
+  color: #b60000;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
 
 
 
@@ -485,3 +493,5 @@ body {
 .text h2 {
     font-size: 20px;
 }
+
+
