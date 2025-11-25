@@ -6,6 +6,7 @@ import Init from './pages/Chooseavatar/Init'
 import Phase from './pages/Phasespage/Phase'
 import About from './pages/Aboutproject/About'
 import Mercadinho from './pages/Mercadinho/mercadinho'
+import Battle from './pages/Battle/Battle';
 
 
 
@@ -21,7 +22,8 @@ function App() {
         <Route path="/init" element={<Init />} />
         <Route path="/phase" element={<Phase />} />
         <Route path="/about" element={<About />} />
-        <Route path="/mercado" element={<Mercadinho />} />
+        <Route path="/game1" element={<Mercadinho />} />
+        <Route path="/game2" element={<Battle />} />
 
       </Routes>
     </Router>
