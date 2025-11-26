@@ -1,125 +1,362 @@
-/* Importando font pelo google fonts */
+/* ---------------------------------------------------------
+   IMPORT DE FONTES
+--------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Yusei+Magic&display=swap');
 
+/* ---------------------------------------------------------
+   BASE GLOBAL
+--------------------------------------------------------- */
 body {
     margin: 0;
+    background-color: #f6e9da;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ---------------------------------------------------------
+   LAYOUT
+--------------------------------------------------------- */
+.layout {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .main-page {
-  background-color: #F4E0C9;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden; /* evita scroll indesejado */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding: 1rem;
+    align-items: center;
 }
 
+/* ---------------------------------------------------------
+   TRAIL
+--------------------------------------------------------- */
 .trail {
-  display: flex;
-  flex-direction: column;
-  margin-left: 21rem;
-  padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.5rem;
 }
 
 .trail h1 {
-  font-family: "Yusei Magic", sans-serif;
-  font-size: 2rem;
-  color: #E97E34;
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 2rem;
+    color: #E97E34;
 }
 
 .phases {
-  display: flex;
-  flex-direction: row;
-  margin-left: 20rem;
+    display: flex;
+    flex-direction: row;
 }
 
 .phases h3 {
-  font-family: "Yusei Magic", sans-serif;
-  font-size: 1.2rem;
-  padding: 0.75rem ;
-  margin-left: 1rem;
-  color: #e97e34;
-
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 1.2rem;
+    padding: 0.75rem;
+    color: #E97E34;
+    cursor: pointer;
 }
 
+/* ---------------------------------------------------------
+   CARDS DE PROGRESSO
+--------------------------------------------------------- */
 .card-progress1 {
-  width: 50rem;
-  height: 15rem;
-  background-color: #187E9B;
-  margin-left: 21rem;
-  border-radius: 2rem;
+    width: 50rem;
+    height: 15rem;
+    background-color: #187E9B;
+    border-radius: 2rem;
 }
 
 .card-progress1 h3 {
-  font-family: "Yusei Magic", sans-serif;
-  font-size: 1rem;
-  padding: 2rem;
-  color:#F4E0C9;
-}
-
-.phases h3 {
-  cursor: pointer
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 1rem;
+    padding: 2rem;
+    color: #F4E0C9;
 }
 
 .card-progress2 {
-  display: flex;
-  flex-direction: column;
-  width: 65rem;
-  height: 10rem;
-  background-color: #187E9B;
-  background-image: url(../../assets/family_budget.png);
-  background-size: 25%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-position: top left;
-  margin-left: 21rem;
-  border-radius: 2rem;
-  padding-bottom: 2rem;
+    display: flex;
+    flex-direction: row;      /* linha, não coluna */
+    align-items: center;      /* alinha verticalmente no meio */
+    gap: 1.25rem;             /* espaço entre h2 e barra */
+    width: 100%;
+    max-width: 1200px;
+    background-color: #187E9B;
+    border-radius: 2rem;
+    padding: 1.5rem;          /* recuo uniforme */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    box-sizing: border-box;
 }
 
 .card-progress2 h2 {
-  font-family: "Yusei Magic", sans-serif;
-  font-size: 1.5rem;
-  padding: 2rem;
-  margin-left: 15rem;
+    margin: 0;
+    padding: 0;
+    color: #F4E0C9;
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 1.25rem;
+    flex: 0 0 auto;          /* não cresce, não encolhe para ocupar espaço */
+    text-align: left;
 }
 
+/* ---------------------------------------------------------
+   CARD QUIZZ
+--------------------------------------------------------- */
 .card-quizz {
-  width: 65rem;
-  height: 28rem;
-  background-color: #187E9B;
-  margin-left: 21rem;
-  border-radius: 2rem;
-  margin-top: 1rem;
-  padding: 1rem;
+    width: 1020px;
+    min-height: 400px; /* deixa uma base, mas permite crescer */
+    background-color: #5796a7b3;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    margin-left: 50px;
+    border-radius: 25px;
+    margin-top: 1rem;
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* libera espaço */
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto; /* SE o conteúdo ultrapassar, ativa scroll */
 }
 
 .card-quizz h2 {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1rem;
-  color: #F4E0C9;
-  padding: 2rem;
-  
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 2rem;
+    color: #F4E0C9;
+    padding: 2rem;
 
+}
+
+.card-quizz p {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-family: "Poppins", sans-serif;
 }
 
 .card-quizz hr {
-  border: none;
-  border-top: 1px solid #F4E0C9; /* cor clara para contrastar com fundo azul */
-  margin: 1rem 0; /* espaço acima e abaixo */
+    border: none;
+    border-top: 1px solid #F4E0C9;
+    margin: 1rem 0;
 }
 
+/* ---------------------------------------------------------
+   SIDEBAR / RIGHT PANEL
+--------------------------------------------------------- */
 .right-side-container {
-  position: relative; /* referência para o content absoluto */
+    position: relative;
 }
 
 .content {
-  position: fixed; /* ou fixed se quiser que fique sempre visível */
-  top: 7.5rem;
-  right: 1.5rem; /* distancia da lateral direita */
-  bottom: 1.5rem;
-  width: 19rem;
-  height: 39.5rem; 
-  background-color: #187E9B;
-  border-radius: 2rem; /* arredonda só o canto que toca o conteúdo */
-  padding: 1rem;
+    position: fixed;
+    top: 7.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    width: 19rem;
+    height: 39.5rem;
+    background-color: #187E9B;
+    border-radius: 2rem;
+    padding: 1rem;
 }
+
+/* ---------------------------------------------------------
+   AVATAR + TEXTO
+--------------------------------------------------------- */
+.avatar-quote {
+    width: 1020px;
+    min-height: 180px;
+    background-color: #e97f34b4;
+    border-radius: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    margin-top: 20px;
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1.5rem;
+}
+
+.avatar-box img {
+    width: 120px;
+    height: auto;
+    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.4));
+}
+
+.quote-content h2 {
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 1.6rem;
+    margin: 0;
+    color: #2d2d2d;
+}
+
+.quote-content h3 {
+    margin: 5px 0;
+    color: #333;
+    font-weight: 500;
+}
+
+.quote-content p {
+    margin: 8px 0 15px 0;
+    max-width: 600px;
+    line-height: 1.4;
+}
+
+.quote-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 10px;
+}
+
+/* ---------------------------------------------------------
+   BOTÕES BASE
+--------------------------------------------------------- */
+.btn-primary {
+    padding: 0.7rem 1.4rem;
+    background-color: #187E9B;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease-in-out;
+    height: 50px; /* SOMENTE PARA BOTÕES NORMAIS */
+}
+
+.btn-primary:hover {
+    background-color: #0f5d74;
+    transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------------
+   BOTÃO DE FASE (GRANDE)
+--------------------------------------------------------- */
+button.btn-primary.phase-btn {
+    width: 300px;
+    height: 150px;
+
+    background: #e97e34;
+    border-radius: 25px;
+
+    font-family: "Yusei Magic", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    transition: transform .25s ease, box-shadow .25s ease;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
+
+/* efeito holográfico */
+button.btn-primary.phase-btn::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+
+    background: linear-gradient(
+        45deg,
+        rgba(255, 120, 40, 0.45),
+        rgba(255, 160, 60, 0.45),
+        rgba(255, 200, 120, 0.45),
+        rgba(255, 140, 60, 0.45)
+    );
+
+    background-size: 400% 400%;
+    opacity: 0;
+    border-radius: 25px;
+    transition: opacity .35s ease;
+    animation: hologramMove 6s linear infinite;
+}
+
+@keyframes hologramMove {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* hover */
+button.btn-primary.phase-btn:hover::before {
+    opacity: 1;
+}
+
+button.btn-primary.phase-btn:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+}
+
+/* click */
+button.btn-primary.phase-btn:active {
+    transform: scale(0.97);
+}
+
+/* ---------------------------------------------------------
+   BOTÃO OUTLINE
+--------------------------------------------------------- */
+.btn-outline {
+    padding: 0.7rem 1.4rem;
+    background: transparent;
+    border: 2px solid #187E9B;
+    color: #187E9B;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.btn-outline:hover {
+    background-color: #187e9b1a;
+    transform: translateY(-2px);
+}
+
+.phase-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* espaço entre os botões */
+    width: 100%;
+    margin-top: 20px;
+}
+
+.quiz-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card-quizz-quizmode {
+  margin-top: 1px !important; /* ajuste como quiser */
+  width: 1200px;
+  height: 720px;
+  overflow-y: hidden;
+  margin-left: 1rem;
+  padding: 25px;
+}
+
+/* wrapper da barra: ocupa o espaço restante */
+.progress-wrapper {
+  flex: 1 1 auto;          /* ocupa o resto do espaço */
+  min-width: 0;            /* essencial para evitar que o conteúdo force quebra de linha */
+  display: flex;
+  align-items: center;     /* centraliza verticalmente a barra interna */
+}
+
+/* se sua ProgressBar usar uma classe interna, garanta que ela seja 100% */
+.progress-wrapper .progressbar,
+.progress-wrapper > div {  /* fallback genérico */
+  width: 100%;
+}
+
+
+
