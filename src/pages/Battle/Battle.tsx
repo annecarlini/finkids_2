@@ -5,6 +5,7 @@ import { ShoppingCart } from 'lucide-react';
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import AvatarN from "../../assets/avatar1-a.png";
+import { useAuth } from '@/hooks/useAuth'
 
 function Battle() {
     type CartItem = {
@@ -66,6 +67,7 @@ function Battle() {
     };
 
     const totalGasto = cartItems.reduce((sum, item) => sum + item.value, 0);
+    const { user } = useAuth();
     const economia = 100 - totalGasto;
 
     const countEssencial = cartItems.filter(item => item.type === "essencial").length;
@@ -214,7 +216,7 @@ function Battle() {
                     <div className="feedback-modal-overlay">
                         <div className="feedback-modal-box">
                             <div className="feedback-header">
-                                <img src={AvatarN} alt="Avatar do jogador" className="feedback-avatar"/>
+                                <img src={user?.avatar || AvatarN} alt="Avatar do jogador" className="feedback-avatar"/>
                                 <h2>Feedback da Missão</h2>
                             </div>
                             <div className="feedback-body">

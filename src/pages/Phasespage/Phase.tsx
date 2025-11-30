@@ -1,15 +1,82 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProgressBar } from '@/components/custom/ProgressBar/Progressbar';
 import { QuizController } from '@/components/Quiz/QuizController';
 import './Phase.css';
 import Mysidebar from '@/components/custom/Sidebard/Mysidebar';
-import AvatarN from "../../assets/avatar1-a.png";
+import { useAuth } from '@/hooks/useAuth'
+import coin from '../../assets/Logotipo.png';
 
 function Phase() {
+  const { user } = useAuth();
   const [currentPhase, setCurrentPhase] = useState<string>("Inicio");
   const [progressValue, setProgressValue] = useState(0);
   const [showQuizCard, setShowQuizCard] = useState(false);
   const [isPhaseFinished, setIsPhaseFinished] = useState(false);
+  const [avatarName, setAvatarName] = useState<string>("Capitão Economix");
+  const [totalCoins, setTotalCoins] = useState<number>(0);
+
+  // Buscar nome do avatar escolhido
+  useEffect(() => {
+    const fetchAvatarName = async () => {
+      try {
+        if (user?.avatar) {
+          const res = await fetch('/api/avatars', { credentials: 'include' });
+          const data = await res.json();
+          if (data?.success && data.avatars) {
+            const avatar = data.avatars.find((a: any) => 
+              a.public_url === user.avatar || a.caminho_imagem === user.avatar
+            );
+            if (avatar?.nome) setAvatarName(avatar.nome);
+          }
+        }
+      } catch (err) {
+        console.error('Erro ao buscar nome do avatar', err);
+      }
+    };
+    fetchAvatarName();
+  }, [user?.avatar]);
+
+  // Carregar moedas do backend
+  const loadCoins = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      
+      const res = await fetch('/api/me/progress', {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      
+      if (!res.ok) return;
+      const data = await res.json();
+      
+      console.log('Dados de progresso recebidos:', data);
+      
+      if (data?.success && data.progress?.phases) {
+        let total = 0;
+        
+        Object.entries(data.progress.phases).forEach(([phase, info]: [string, any]) => {
+          const phaseCoins = info?.progress?.coins || 0;
+          console.log(`Fase ${phase}: ${phaseCoins} moedas`);
+          total += phaseCoins;
+        });
+        
+        console.log('Total de moedas calculado:', total);
+        setTotalCoins(total);
+      }
+    } catch (err) {
+      console.error('Erro ao carregar moedas:', err);
+    }
+  };
+
+  // Carregar moedas ao montar e ao mudar de fase
+  useEffect(() => {
+    loadCoins();
+  }, [currentPhase]);
 
   const handleOpenPhases = () => {
     setShowQuizCard(true);
@@ -21,6 +88,7 @@ function Phase() {
     setCurrentPhase(phase);
     setProgressValue(0);
     setIsPhaseFinished(false);
+    setShowQuizCard(true);
   };
 
   const handlePhaseFinished = () => {
@@ -46,11 +114,12 @@ function Phase() {
         {currentPhase === "Inicio" && (
           <div className="avatar-quote fixed-block">
             <div className="avatar-box">
-              <img src={AvatarN} alt="Avatar" />
+              {/* Mostrar avatar do usuário autenticado se disponível */}
+              <img src={user?.avatar || '/avatars/shadcn.jpg'} alt="Avatar" />
             </div>
 
             <div className="quote-content">
-              <h2>Oi, eu sou o Capitão Economix!</h2>
+              <h2>Oi, eu sou {avatarName}!</h2>
 
               {!showQuizCard && (
                 <>
@@ -91,7 +160,7 @@ function Phase() {
               <div className="phase-instructions">
                 <h2>Entenda como iniciar o desafio!</h2>
                 <p>
-                  Cada pergunta certa turbina sua carteira com +50 moedas.
+                  Cada pergunta certa turbina sua carteira com +25 moedas.
                   Escolha uma fase, clique no botão e mostre que você manda muito bem nas finanças!
                 </p>
 
@@ -121,6 +190,13 @@ function Phase() {
                     {currentPhase === "Phase3" && "Investimentos"}
                   </h2>
 
+                  <div className="coins-display" style={{ margin: '10px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <img src={coin} alt="moeda" style={{ width: '30px', height: '30px' }} />
+                    <span style={{ fontSize: '1.1em', fontWeight: 'bold' }}>
+                      Total: {totalCoins} moedas
+                    </span>
+                  </div>
+
                   <div className="progress-wrapper">
                     <ProgressBar value={progressValue} />
                   </div>
@@ -128,13 +204,49 @@ function Phase() {
 
                 <QuizController
                   phaseId={currentPhase}
-                  onStepChange={(currentStep: number, totalSteps: number) => {
-                    const progress = ((currentStep + 1) / totalSteps) * 100;
-                    setProgressValue(progress);
-
-                    // Se o quiz terminou
+                  onCoinsUpdate={loadCoins}
+                  onStepChange={async (currentStep: number, totalSteps: number) => {
+                    const percent = ((currentStep + 1) / totalSteps) * 100;
+                    setProgressValue(percent);
+                    // salvar progresso no backend (não bloqueante)
+                    try {
+                      const token = localStorage.getItem('token');
+                      if (!token) return;
+                      await fetch('/api/me/progress', {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: {
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({ phase: currentPhase, step_id: currentStep, progress: { percent } }),
+                      });
+                      await loadCoins();
+                } catch (err) {
+                  console.error('Não foi possível salvar progresso:', err);
+                }                    // Se o quiz terminou
                     if (currentStep + 1 === totalSteps) {
                       handlePhaseFinished();
+                    }
+                  }}
+                  onPhaseFinish={async (totalCoins: number) => {
+                    // marcar fase como completa e salvar moedas ganhas
+                    setProgressValue(100);
+                    try {
+                      const token = localStorage.getItem('token');
+                      if (!token) return;
+                      await fetch('/api/me/progress', {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: {
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({ phase: currentPhase, progress: { percent: 100, completed: true, coins: totalCoins } }),
+                      });
+                      await loadCoins();
+                    } catch (err) {
+                      console.warn('Não foi possível salvar progresso final', err);
                     }
                   }}
                 />

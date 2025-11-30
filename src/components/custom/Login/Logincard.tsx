@@ -31,11 +31,12 @@ export function Logincard({ className }: LogincardProps) {
     setLoading(true)
     setError("")
 
-    const endpoint = isRegister ? "/auth/register" : "/auth/login"
+    const endpoint = isRegister ? "/api/auth/register" : "/api/auth/login"
 
     try {
       const response = await fetch(endpoint, {
         method: "POST",
+        credentials: 'include',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: email,
@@ -47,11 +48,22 @@ export function Logincard({ className }: LogincardProps) {
       const data = await response.json()
 
       if (data.success) {
+        // Salva token e usuário no localStorage para sessão no frontend.
+        // Comentário: o token será usado em requests que exigem autorização
+        // (ex: escolher avatar). O user é gravado para exibir avatar/nome
+        // sem precisar chamar /auth/me em cada carregamento.
         localStorage.setItem("token", data.token)
         localStorage.setItem("user", JSON.stringify(data.user))
+        // Navega para a tela de escolha de avatar (ou fluxo principal)
         navigate("/init")
       } else {
-        setError(data.message || "Erro inesperado")
+        // mostrar erros de validação retornados pelo backend quando disponíveis
+        if (data && data.errors && Array.isArray(data.errors) && data.errors.length) {
+          const msgs = data.errors.map((e: any) => e.msg || `${e.param} inválido`).join('; ')
+          setError(msgs)
+        } else {
+          setError(data.message || "Erro inesperado")
+        }
       }
     } catch (error) {
       setError("Erro ao fazer login. Tente novamente.")

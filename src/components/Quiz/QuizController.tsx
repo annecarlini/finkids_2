@@ -21,12 +21,14 @@ interface QuizControllerProps {
   phaseId: string; // ex: "Phase1" ou "Phase2"
   onStepChange?: (currentStep: number, totalSteps: number) => void;
   onPhaseFinish?: (totalScore: number) => void;
+  onCoinsUpdate?: () => void; // Callback para atualizar moedas
 }
 
 export function QuizController({
   phaseId,
   onStepChange,
   onPhaseFinish,
+  onCoinsUpdate,
 }: QuizControllerProps) {
   const [steps, setSteps] = useState<Step[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
@@ -59,15 +61,15 @@ export function QuizController({
     onStepChange?.(currentStep, totalSteps);
   }, [currentStep, totalSteps, onStepChange]);
 
-  const handleNext = (points: number = 0) => {
-    // registra pontos do step (quiz retorna pontos, textos passam 0)
-    setScoreHistory((prev) => [...prev, points]);
+  const handleNext = (coins: number = 0) => {
+    // registra moedas do step (quiz retorna moedas, textos passam 0)
+    setScoreHistory((prev) => [...prev, coins]);
 
     if (currentStep < totalSteps - 1) {
       setCurrentStep((s) => s + 1);
     } else {
       // fase finalizada
-      const total = scoreHistory.reduce((a, b) => a + b, 0) + points;
+      const total = scoreHistory.reduce((a, b) => a + b, 0) + coins;
       onPhaseFinish?.(total);
       // você pode escolher manter o histórico ou resetar
     }
@@ -105,6 +107,7 @@ export function QuizController({
           phaseId={phaseId}
           quizId={step.quizId}
           onFinish={(points) => handleNext(points)}
+          onCoinsUpdate={onCoinsUpdate}
         />
       )}
 

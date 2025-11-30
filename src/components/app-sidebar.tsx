@@ -18,6 +18,9 @@ import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
 import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
+// Hook de autenticação local que sincroniza com localStorage
+// Usado aqui para mostrar avatar/nome do usuário logado no sidebar
+import { useAuth } from "@/hooks/useAuth"
 import {
   Sidebar,
   SidebarContent,
@@ -37,37 +40,40 @@ const data = {
   navMain: [
     {
       title: "Conceitos de aprendizagem",
-      url: "#",
+      url: "/phase",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
           title: "Fase 1",
-          url: "#",
+          url: "/phase",
         },
         {
           title: "Fase 2",
-          url: "#",
+          url: "/phase",
         },
         {
           title: "Fase 3",
-          url: "#",
+          url: "/phase",
         },
       ],
     },
     {
       title: "Jogos de aprendizagem",
-      url: "#",
+      url: "/game1",
       icon: SquareTerminal,
       isActive: true,
+      requiresCoins: 200,
       items: [
         {
           title: "Labirinto",
-          url: "#",
+          url: "/game1",
+          requiresCoins: 200,
         },
         {
           title: "Carrinho",
-          url: "#",
+          url: "/game2",
+          requiresCoins: 200,
         },
       ],
     },
@@ -92,6 +98,11 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  // Obter usuário do hook. Se não houver usuário, usamos um dado de
+  // fallback (data.user) para manter o sidebar preenchido durante
+  // desenvolvimento / antes do login.
+  const { user } = useAuth()
+  const currentUser = user || data.user
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -117,7 +128,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        {/* Passa o usuário para o componente NavUser. Comentário: NavUser
+          espera um objeto com name, email e avatar (url relativa).
+          Usamos `currentUser.avatar` que normalmente vem do campo
+          `public_url` do backend (ex: /avatars/avatar1.png). */}
+        <NavUser user={{ name: currentUser.name || currentUser.name || 'Usuário', email: currentUser.email || 'user@example.com', avatar: currentUser.avatar || '/avatars/shadcn.jpg' }} />
       </SidebarFooter>
     </Sidebar>
   )

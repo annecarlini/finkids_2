@@ -13,9 +13,12 @@ interface QuizProps {
   phaseId: string;      // "Phase1" ou "Phase2"
   quizId: string;       // ex: "quiz1" ou "quiz1_phase2"
   onFinish: (score: number) => void;
+  onCoinsUpdate?: () => void; // Callback para atualizar moedas
 }
 
-export function Quiz({ phaseId, quizId, onFinish }: QuizProps) {
+const COINS_PER_CORRECT = 25; // Moedas ganhas por acerto
+
+export function Quiz({ phaseId, quizId, onFinish, onCoinsUpdate }: QuizProps) {
   const [questionsData, setQuestionsData] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -68,8 +71,72 @@ export function Quiz({ phaseId, quizId, onFinish }: QuizProps) {
     setSelectedOption(option);
 
     if (option === question.reposta_correta) {
-      setFeedback("✅ Resposta correta!");
+      setFeedback(`✅ Resposta correta! +${COINS_PER_CORRECT} moedas`);
       setScore((s) => s + 1);
+      
+      // Salvar moedas imediatamente após acerto
+      (async () => {
+        try {
+          const token = localStorage.getItem('token');
+          if (!token) {
+            console.error('Token não encontrado. Usuário precisa fazer login.');
+            return;
+          }
+          
+          const res = await fetch('/api/me/progress', {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          
+          if (!res.ok) {
+            console.error('Erro ao buscar progresso:', res.status, await res.text());
+            return;
+          }
+          
+          const data = await res.json();
+          
+          // Pegar moedas atuais da fase
+          let currentPhaseCoins = 0;
+          if (data?.success && data.progress?.phases && data.progress.phases[phaseId]) {
+            currentPhaseCoins = data.progress.phases[phaseId].progress?.coins || 0;
+          }
+          
+          console.log(`Moedas atuais da fase ${phaseId}:`, currentPhaseCoins);
+          console.log(`Adicionando: ${COINS_PER_CORRECT} moedas`);
+          
+          // Salvar moedas incrementadas
+          const saveRes = await fetch('/api/me/progress', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ 
+              phase: phaseId, 
+              progress: { 
+                coins: currentPhaseCoins + COINS_PER_CORRECT,
+                quizId: quizId,
+                timestamp: new Date().toISOString()
+              } 
+            }),
+          });
+          
+          if (!saveRes.ok) {
+            console.error('Erro ao salvar moedas:', saveRes.status, await saveRes.text());
+          } else {
+            console.log('Moedas salvas com sucesso! Nova quantidade:', currentPhaseCoins + COINS_PER_CORRECT);
+            // Notificar que as moedas foram atualizadas
+            onCoinsUpdate?.();
+          }
+        } catch (err) {
+          console.error('Não foi possível salvar moedas automaticamente', err);
+        }
+      })();
     } else {
       setFeedback(`❌ Resposta correta: ${question.reposta_correta}`);
     }
@@ -81,8 +148,9 @@ export function Quiz({ phaseId, quizId, onFinish }: QuizProps) {
       setSelectedOption(null);
       setFeedback(null);
     } else {
-      // fim do quiz — retorna pontos ao controller
-      onFinish(score);
+      // fim do quiz — retorna moedas ganhas (já foram salvas a cada acerto)
+      const totalCoins = score * COINS_PER_CORRECT;
+      onFinish(totalCoins);
     }
   };
 
